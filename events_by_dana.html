@@ -543,18 +543,38 @@ function sendForm(){
     if(!v){el.style.borderColor='#c0605a';pass=false;}
   });
   if(!pass) return;
-  const subject=encodeURIComponent('New Inquiry from '+fn+(ln?' '+ln:'')+' — '+reason);
-  const body=encodeURIComponent(
-    'Name: '+fn+(ln?' '+ln:'')+'\n'+
-    'Email: '+em+'\n'+
-    (ph?'Phone: '+ph+'\n':'')+
-    'Reaching out about: '+reason+'\n'+
-    (et?'Event Type: '+et+'\n':'')+
-    '\nMessage:\n'+msg
-  );
-  window.location.href='mailto:eventdesignsbydana@yahoo.com?subject='+subject+'&body='+body;
-  document.getElementById('formBody').style.display='none';
-  document.getElementById('formOk').style.display='block';
+  const data={
+    access_key:'7e81816b-262c-409e-bcb6-50aee06f74c0',
+    subject:'New Inquiry from '+fn+(ln?' '+ln:'')+' — '+reason,
+    from_name:fn+(ln?' '+ln:''),
+    name:fn+(ln?' '+ln:''),
+    email:em,
+    phone:ph||'Not provided',
+    reaching_out_about:reason,
+    event_type:et||'Not specified',
+    message:msg
+  };
+  const btn=document.querySelector('.fsub-btn');
+  btn.disabled=true;
+  btn.textContent='Sending…';
+  fetch('https://api.web3forms.com/submit',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(data)
+  }).then(r=>r.json()).then(res=>{
+    if(res.success){
+      document.getElementById('formBody').style.display='none';
+      document.getElementById('formOk').style.display='block';
+    }else{
+      alert('Something went wrong. Please try again.');
+      btn.disabled=false;
+      btn.textContent='Send Message →';
+    }
+  }).catch(()=>{
+    alert('Network error. Please check your connection and try again.');
+    btn.disabled=false;
+    btn.textContent='Send Message →';
+  });
 }
 document.querySelectorAll('input,textarea,select').forEach(el=>{
   el.addEventListener('input',function(){this.style.borderColor='';});
