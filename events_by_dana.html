@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Designs By Dana — Floral &amp; Event Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#faf6f1;--blush:#e8c4b8;--rose:#c0605a;--deep:#1a0f0e;--gold:#c9a96e;--text:#3a2624;--muted:#8a7370}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 4rem;background:rgba(250,246,241,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,169,110,.2);transition:all .4s}
+.nav-logo{display:inline-flex;align-items:center;gap:.85rem;font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:500;letter-spacing:.04em;color:var(--deep);text-decoration:none}
+.nav-logo span{color:var(--rose)}
+.brand-mark{width:54px;height:54px;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 10px 20px rgba(58,38,36,.12))}
+.brand-text{display:flex;flex-direction:column;line-height:1}
+.brand-line{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:500;letter-spacing:.04em;color:var(--deep)}
+.brand-subline{font-size:.54rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-top:.35rem}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
+.nav-links a:hover{color:var(--rose)}
+.nav-cta{background:var(--rose);color:white!important;padding:.6rem 1.4rem}
+.nav-cta:hover{background:var(--deep)!important}
+/* MOBILE MENU */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.5rem;background:none;border:none;z-index:101}
+.hamburger span{display:block;width:24px;height:2px;background:var(--deep);transition:all .3s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(250,246,241,.98);backdrop-filter:blur(20px);z-index:99;flex-direction:column;justify-content:center;align-items:center;gap:2rem;opacity:0;transition:opacity .3s}
+.mobile-overlay.open{opacity:1}
+.mobile-overlay a{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--deep);text-decoration:none;transition:color .3s}
+.mobile-overlay a:hover{color:var(--rose)}
+.mobile-overlay .nav-cta{font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:.9rem 2rem;margin-top:1rem}
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:10rem 4rem 6rem 6rem;position:relative;z-index:2}
+.hero-eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem}
+.hero-eyebrow::before{content:'';display:block;width:2.5rem;height:1px;background:var(--gold)}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,5.5vw,5rem);font-weight:300;line-height:1.1;color:var(--deep);margin-bottom:1.8rem}
+.hero-title em{font-style:italic;color:var(--rose)}
+.hero-subtitle{font-size:.9rem;font-weight:300;line-height:1.9;color:var(--muted);max-width:380px;margin-bottom:3rem}
+.hero-actions{display:flex;gap:1.2rem;align-items:center}
+.btn-primary{background:var(--rose);color:white;padding:1rem 2.4rem;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:var(--deep);transform:translateY(-2px);box-shadow:0 8px 30px rgba(192,96,90,.35)}
+.btn-ghost{color:var(--text);font-size:.72rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .3s}
+.btn-ghost:hover{color:var(--rose)}
+.btn-ghost::after{content:'→';transition:transform .3s}
+.btn-ghost:hover::after{transform:translateX(4px)}
+.hero-right{position:relative;overflow:hidden}
+.hero-right-inner{position:absolute;inset:0;background:linear-gradient(135deg,#f0e6dc 0%,#e8d5c8 40%,#d4b8aa 100%);display:flex;align-items:center;justify-content:center}
+.hero-bg-radials{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(232,196,184,.6) 0%,transparent 60%),radial-gradient(ellipse at 70% 20%,rgba(201,169,110,.3) 0%,transparent 50%),radial-gradient(ellipse at 60% 80%,rgba(192,96,90,.2) 0%,transparent 45%)}
+.hero-card{position:relative;z-index:2;background:rgba(255,255,255,.6);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.7);padding:3rem 2.5rem;width:320px;box-shadow:0 20px 80px rgba(58,38,36,.12);animation:floatCard 6s ease-in-out infinite}
+@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;font-style:italic;color:var(--deep);margin-bottom:.4rem}
+.card-sub{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem}
+.card-services{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.card-services li{display:flex;align-items:center;gap:.7rem;font-size:.8rem;color:var(--text)}
+.check-dot{width:18px;height:18px;min-width:18px;border-radius:50%;background:var(--rose);display:inline-flex;align-items:center;justify-content:center;color:white;font-size:.55rem;font-weight:700}
+.big-floral{position:absolute;font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(192,96,90,.07);font-size:16rem;font-weight:300;bottom:-3rem;right:-1rem;line-height:1;pointer-events:none}
+/* SECTIONS */
+section{padding:8rem 6rem}
+.section-label{font-size:.65rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem}
+.section-label::before{content:'';display:block;width:2rem;height:1px;background:var(--gold)}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:300;line-height:1.2;color:var(--deep);margin-bottom:1.5rem}
+.section-title em{font-style:italic;color:var(--rose)}
+/* ABOUT */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;background:white}
+.about-img-frame{width:100%;aspect-ratio:3/4;background:linear-gradient(145deg,#e8d5c8,#d4b8aa,#c9a0a0);position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:flex-start}
+.about-img-frame img{width:100%;height:100%;object-fit:cover;display:block}
+.about-img-caption{position:absolute;bottom:1.5rem;left:1.5rem;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(255,255,255,.7)}
+.about-img-wrap{position:relative}
+.accent-box{position:absolute;bottom:-2rem;right:-2rem;width:160px;height:160px;border:2px solid var(--blush);z-index:-1}
+.accent-corner{position:absolute;top:-1.5rem;left:-1.5rem;width:80px;height:80px;border-top:2px solid var(--gold);border-left:2px solid var(--gold)}
+.about-text p{font-size:.9rem;font-weight:300;line-height:2;color:var(--muted);margin-bottom:1.4rem}
+.ceo-kicker{display:inline-flex;align-items:center;gap:.7rem;padding:.45rem .9rem;border:1px solid rgba(201,169,110,.35);background:rgba(201,169,110,.08);font-size:.62rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--deep);margin-bottom:1.25rem}
+.ceo-kicker::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--rose);display:block}
+.ceo-signature{margin-top:2rem;padding-top:1.4rem;border-top:1px solid rgba(201,169,110,.25)}
+.ceo-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;color:var(--deep)}
+.ceo-role{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-top:.35rem}
+blockquote.pull{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.6rem;font-weight:300;line-height:1.5;color:var(--rose);border-left:2px solid var(--blush);padding-left:1.5rem;margin:2.5rem 0}
+.insta-link{display:inline-flex;align-items:center;gap:.7rem;font-size:.72rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--rose);text-decoration:none;border-bottom:1px solid var(--blush);padding-bottom:.3rem;transition:all .3s}
+.insta-link:hover{color:var(--deep);border-color:var(--deep)}
+/* SERVICES */
+.services{background:var(--cream);text-align:center}
+.services-header{max-width:600px;margin:0 auto 5rem}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.svc-card{background:white;padding:3rem 2rem;position:relative;overflow:hidden;transition:all .4s;border-bottom:3px solid transparent}
+.svc-card:hover{transform:translateY(-8px);border-bottom-color:var(--rose);box-shadow:0 20px 60px rgba(58,38,36,.1)}
+.svc-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,rgba(232,196,184,.2),transparent 60%);opacity:0;transition:opacity .4s}
+.svc-card:hover::before{opacity:1}
+.svc-icon{font-size:2.8rem;margin-bottom:1.5rem;display:block}
+.svc-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--deep);margin-bottom:1rem}
+.svc-desc{font-size:.82rem;font-weight:300;line-height:1.8;color:var(--muted)}
+.svc-cta-card{background:var(--rose);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:3rem 2rem}
+.svc-cta-card .heading{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.6rem;font-weight:300;color:white;margin-bottom:1rem;line-height:1.3}
+.svc-cta-card .sub{font-size:.82rem;color:rgba(255,255,255,.85);margin-bottom:1.8rem;font-weight:300;line-height:1.8}
+.btn-white{background:white;color:var(--rose);padding:.9rem 2rem;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:all .3s}
+.btn-white:hover{background:var(--deep);color:white}
+/* GALLERY */
+.gallery-section{background:var(--cream);text-align:center}
+.gallery-header{max-width:600px;margin:0 auto 4rem}
+.ig-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.ig-embed{position:relative;width:100%;padding-bottom:125%;overflow:hidden;background:white;border-bottom:3px solid transparent;transition:all .4s}
+.ig-embed:hover{transform:translateY(-6px);border-bottom-color:var(--rose);box-shadow:0 20px 60px rgba(58,38,36,.1)}
+.ig-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.gallery-cta{padding:4rem 6rem;text-align:center;background:var(--cream)}
+.gallery-cta p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:var(--muted);margin-bottom:1.5rem}
+/* TESTIMONIALS */
+.testimonials{background:var(--deep);color:white;text-align:center}
+.testimonials .section-label{color:var(--gold);justify-content:center}
+.testimonials .section-label::before{background:var(--gold)}
+.testimonials .section-title{color:white}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:4rem}
+.tcard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:2.5rem 2rem;text-align:left;transition:all .3s}
+.tcard:hover{background:rgba(255,255,255,.09);transform:translateY(-4px)}
+.tstars{color:var(--gold);font-size:.9rem;letter-spacing:.1em;margin-bottom:1.2rem}
+.ttext{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;font-weight:300;line-height:1.7;color:rgba(255,255,255,.85);margin-bottom:1.5rem}
+.tauthor{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+/* CONTACT */
+.contact{background:white;display:grid;grid-template-columns:1fr 1.4fr;gap:6rem;align-items:start}
+.cinfo p{font-size:.88rem;font-weight:300;line-height:2;color:var(--muted);margin-bottom:2.5rem}
+.cdetail{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem}
+.cicon{width:42px;height:42px;background:var(--cream);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.clabel{font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.cval{font-size:.82rem;color:var(--text)}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.fg{display:flex;flex-direction:column;gap:.5rem}
+.fg.full{grid-column:1/-1}
+.fg label{font-size:.63rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.fg input,.fg select,.fg textarea{background:var(--cream);border:1px solid rgba(138,115,112,.2);padding:.9rem 1.1rem;font-family:'Montserrat',sans-serif;font-size:.82rem;color:var(--text);outline:none;transition:border-color .3s,box-shadow .3s;-webkit-appearance:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--rose);box-shadow:0 0 0 3px rgba(192,96,90,.1)}
+.fg textarea{height:130px;resize:vertical}
+.chips{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.chip-label{font-size:.63rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;display:block}
+.chip{padding:.5rem 1.1rem;background:var(--cream);border:1px solid rgba(138,115,112,.2);font-family:'Montserrat',sans-serif;font-size:.7rem;letter-spacing:.1em;color:var(--muted);cursor:pointer;transition:all .2s;user-select:none}
+.chip:hover,.chip.active{background:var(--rose);border-color:var(--rose);color:white}
+.fsub-btn{margin-top:1.5rem;width:100%;background:var(--deep);color:white;padding:1.1rem;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s}
+.fsub-btn:hover{background:var(--rose);transform:translateY(-2px);box-shadow:0 8px 30px rgba(192,96,90,.3)}
+.form-ok{display:none;background:rgba(192,96,90,.07);border:1px solid rgba(192,96,90,.3);padding:2rem;text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:var(--rose)}
+/* FOOTER */
+footer{background:var(--deep);color:rgba(255,255,255,.5);padding:4rem 6rem;display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem}
+.fbrand{display:inline-flex;align-items:center;gap:.9rem;font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:400;color:white;margin-bottom:.8rem}
+.fbrand span{color:var(--rose)}
+.fbrand .brand-mark{width:62px;height:62px;filter:none}
+.fbrand .brand-line{color:white;font-size:1.8rem}
+.fbrand .brand-subline{color:rgba(255,255,255,.55)}
+.ftag{font-size:.8rem;line-height:1.8;margin-bottom:1.5rem}
+.fsocial{display:flex;gap:.8rem}
+.fsocial a{width:38px;height:38px;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;text-decoration:none;color:white;transition:all .3s}
+.fsocial a:hover{background:var(--rose);border-color:var(--rose)}
+.fcol h4{font-size:.65rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.fcol ul a{font-size:.8rem;color:rgba(255,255,255,.5);text-decoration:none;transition:color .3s}
+.fcol ul a:hover{color:white}
+.fbot{grid-column:1/-1;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;font-size:.72rem}
+/* ANIMATIONS */
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.hero-left > *{animation:fadeInUp .8s ease both}
+.hero-left > *:nth-child(1){animation-delay:.1s}
+.hero-left > *:nth-child(2){animation-delay:.25s}
+.hero-left > *:nth-child(3){animation-delay:.4s}
+.hero-left > *:nth-child(4){animation-delay:.55s}
+.hero-right{animation:fadeInUp 1s ease .3s both}
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+.fade-up.in{opacity:1;transform:translateY(0)}
+/* RESPONSIVE */
+@media(max-width:1024px){
+  nav{padding:1.2rem 2rem}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  section{padding:5rem 2rem}
+  .hero{grid-template-columns:1fr}
+  .hero-left{padding:8rem 2rem 3rem}
+  .hero-right{min-height:55vh}
+  .about,.contact{grid-template-columns:1fr;gap:3rem}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .ig-gallery{grid-template-columns:repeat(2,1fr)}
+  .gallery-cta{padding:3rem 2rem}
+  .tgrid{grid-template-columns:1fr}
+  footer{grid-template-columns:1fr;gap:2rem;padding:3rem 2rem}
+  .fbot{flex-direction:column;gap:1rem;text-align:center}
+  .accent-box{right:-1rem;bottom:-1rem;width:100px;height:100px}
+  .accent-corner{top:-1rem;left:-1rem;width:50px;height:50px}
+}
+@media(max-width:600px){
+  .brand-mark{width:44px;height:44px}
+  .brand-line{font-size:1.25rem}
+  .brand-subline{font-size:.48rem;letter-spacing:.22em}
+  .hero-left{padding:7rem 1.5rem 2rem}
+  .hero-card{width:280px;padding:2rem 1.5rem}
+  .hero-actions{flex-direction:column;align-items:flex-start;gap:1rem}
+  .btn-primary{width:100%;text-align:center}
+  .services-grid,.fgrid{grid-template-columns:1fr}
+  .ig-gallery{grid-template-columns:1fr}
+  .gallery-cta{padding:2.5rem 1.5rem}
+  .accent-box,.accent-corner{display:none}
+  blockquote.pull{font-size:1.3rem}
+  .contact{padding:4rem 1.5rem}
+  footer{padding:2.5rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="events-by-dana-logo.png" alt="Event Designs By Dana logo" class="brand-mark">
+    <span class="brand-text">
+      <span class="brand-line">Event Designs <span>By Dana</span></span>
+      <span class="brand-subline">Floral &amp; Event Design</span>
+    </span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-overlay" id="mobileMenu">
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
+  <a href="#contact" class="nav-cta" onclick="toggleMenu()">Book Now</a>
+</div>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Event Design &amp; Decor</div>
+    <h1 class="hero-title">Where every detail<br>tells your <em>story</em></h1>
+    <p class="hero-subtitle">Transforming spaces into unforgettable experiences — floral artistry, spirit-themed décor, and personalized elegance for every occasion.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Request a Quote</a>
+      <a href="#services" class="btn-ghost">Our Services</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-inner">
+      <div class="hero-bg-radials"></div>
+      <div class="hero-card">
+        <div class="card-title">Events by Dana</div>
+        <div class="card-sub">Dana Iman · Event Designer</div>
+        <ul class="card-services">
+          <li><span class="check-dot">✓</span> Custom Floral Arrangements</li>
+          <li><span class="check-dot">✓</span> Spirit-Themed Décor</li>
+          <li><span class="check-dot">✓</span> Balloon Garlands &amp; Arches</li>
+          <li><span class="check-dot">✓</span> Graduation &amp; Banquet Packages</li>
+          <li><span class="check-dot">✓</span> Personalized Gifts &amp; Treats</li>
+        </ul>
+      </div>
+      <div class="big-floral">✿</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-img-wrap fade-up">
+    <div class="about-img-frame">
+      <img src="dana-ceo-portrait.jpg" alt="Dana Iman standing in a garden walkway">
+      <div class="about-img-caption">Dana Iman</div>
+    </div>
+    <div class="accent-box"></div>
+    <div class="accent-corner"></div>
+  </div>
+  <div class="about-text fade-up">
+    <div class="section-label">Meet the Artist</div>
+    <div class="ceo-kicker">Founder &amp; CEO</div>
+    <h2 class="section-title">A personal note from <em>Dana</em></h2>
+    <p>As Founder and CEO of Events by Dana, I believe every celebration should feel elevated, intentional, and deeply personal to the people at the center of it.</p>
+    <p>My role is to lead every project with creativity, professionalism, and care so our clients feel confident from the first conversation to the final reveal. Whether we are designing florals for an intimate gathering or producing decor for a large-scale milestone event, excellence remains the standard.</p>
+    <blockquote class="pull">"When clients trust us with their moment, we treat it like a signature experience."</blockquote>
+    <p>Thank you for considering Events by Dana. It is a privilege to help families, schools, teams, and organizations celebrate life beautifully, and I look forward to creating something unforgettable for you.</p>
+    <div class="ceo-signature">
+      <div class="ceo-name">Dana Iman</div>
+      <div class="ceo-role">Founder &amp; CEO, Events by Dana</div>
+    </div>
+    <a href="https://www.instagram.com/event_designs_by_dana/" target="_blank" class="insta-link">Follow @event_designs_by_dana</a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header fade-up">
+    <div class="section-label" style="justify-content:center">What We Offer</div>
+    <h2 class="section-title">Crafted for every <em>celebration</em></h2>
+  </div>
+  <div class="services-grid">
+    <div class="svc-card fade-up">
+      <span class="svc-icon">🌺</span>
+      <div class="svc-name">Custom Floral Arrangements</div>
+      <p class="svc-desc">Hand-crafted bouquets, table centerpieces, and floral installations tailored to your palette and theme. Every bloom chosen with care.</p>
+    </div>
+    <div class="svc-card fade-up">
+      <span class="svc-icon">🏆</span>
+      <div class="svc-name">Spirit-Themed Décor</div>
+      <p class="svc-desc">Show your team pride with custom décor for game days, pep rallies, and performances — vibrant, energetic, and unforgettable.</p>
+    </div>
+    <div class="svc-card fade-up">
+      <span class="svc-icon">🎈</span>
+      <div class="svc-name">Balloon Garlands &amp; Arches</div>
+      <p class="svc-desc">From dreamy pastel clouds to bold statement pieces — balloon garlands, arches, and centerpieces that transform any room.</p>
+    </div>
+    <div class="svc-card fade-up">
+      <span class="svc-icon">🎓</span>
+      <div class="svc-name">Graduation &amp; Banquet Packages</div>
+      <p class="svc-desc">Complete décor packages for milestone moments — graduation parties, award banquets, and recognition events done beautifully.</p>
+    </div>
+    <div class="svc-card fade-up">
+      <span class="svc-icon">🎁</span>
+      <div class="svc-name">Personalized Gifts &amp; Treats</div>
+      <p class="svc-desc">Custom gift arrangements, treat displays, and seasonal designs that add the perfect finishing touch to any occasion.</p>
+    </div>
+    <div class="svc-card svc-cta-card fade-up">
+      <div class="heading">Have a custom vision in mind?</div>
+      <p class="sub">Every dream event starts with a conversation. Let's bring your ideas to life.</p>
+      <a href="#contact" class="btn-white">Let's Talk</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-header fade-up">
+    <div class="section-label" style="justify-content:center">Our Work</div>
+    <h2 class="section-title">Recent <em>creations</em></h2>
+  </div>
+  <div class="ig-gallery">
+    <div class="ig-embed fade-up">
+      <iframe src="https://www.instagram.com/p/DVKyG9nDGg9/embed/" loading="lazy" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe>
+    </div>
+    <div class="ig-embed fade-up">
+      <iframe src="https://www.instagram.com/p/DUyxgcAiijH/embed/" loading="lazy" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe>
+    </div>
+    <div class="ig-embed fade-up">
+      <iframe src="https://www.instagram.com/p/DU36LlNincT/embed/" loading="lazy" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe>
+    </div>
+    <div class="ig-embed fade-up">
+      <iframe src="https://www.instagram.com/p/DVXLD14jD2z/embed/" loading="lazy" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe>
+    </div>
+    <div class="ig-embed fade-up">
+      <iframe src="https://www.instagram.com/p/DVAbTcADNuV/embed/" loading="lazy" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe>
+    </div>
+  </div>
+  <div class="gallery-cta">
+    <p>See more of Dana's work on Instagram</p>
+    <a href="https://www.instagram.com/event_designs_by_dana/" target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:.6rem">@event_designs_by_dana</a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-label">Kind Words</div>
+  <h2 class="section-title">What clients are <em>saying</em></h2>
+  <div class="tgrid">
+    <div class="tcard fade-up">
+      <div class="tstars">★★★★★</div>
+      <p class="ttext">"Dana turned our daughter's graduation party into something magical. The balloon arch and florals were absolutely stunning — everyone kept asking who did the décor!"</p>
+      <div class="tauthor">— Maria R. · Graduation Party</div>
+    </div>
+    <div class="tcard fade-up">
+      <div class="tstars">★★★★★</div>
+      <p class="ttext">"The spirit-themed setup for our team banquet was beyond what we imagined. Dana has a gift for taking a vision and making it ten times better."</p>
+      <div class="tauthor">— Coach T. · Sports Banquet</div>
+    </div>
+    <div class="tcard fade-up">
+      <div class="tstars">★★★★★</div>
+      <p class="ttext">"Professional, creative, and so easy to work with. The personalized gift arrangements were the highlight of our baby shower — truly special!"</p>
+      <div class="tauthor">— Ashley M. · Baby Shower</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="cinfo">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-title">Let's create something <em>beautiful</em></h2>
+    <p>Whether you're ready to book or just exploring ideas, I'd love to hear from you. Share your vision and let's start planning your perfect event.</p>
+    <div class="cdetail">
+      <div class="cicon">📸</div>
+      <div><div class="clabel">Instagram</div><div class="cval">@event_designs_by_dana</div></div>
+    </div>
+    <div class="cdetail">
+      <div class="cicon">📍</div>
+      <div><div class="clabel">Location</div><div class="cval">Available for local &amp; regional events</div></div>
+    </div>
+    <div class="cdetail">
+      <div class="cicon">⏱</div>
+      <div><div class="clabel">Response Time</div><div class="cval">Typically within 24–48 hours</div></div>
+    </div>
+  </div>
+
+  <div class="fade-up">
+    <div id="formOk" class="form-ok">Thank you! Dana will be in touch with you soon. 🌸</div>
+    <div id="formBody">
+      <div style="margin-bottom:1.5rem">
+        <span class="chip-label">I'm reaching out about…</span>
+        <div class="chips">
+          <div class="chip active">📋 Booking</div>
+          <div class="chip">💬 Quote Request</div>
+          <div class="chip">⭐ Feedback</div>
+          <div class="chip">✉️ General</div>
+        </div>
+      </div>
+      <div class="fgrid">
+        <div class="fg">
+          <label>First Name</label>
+          <input type="text" id="fn" placeholder="Your first name">
+        </div>
+        <div class="fg">
+          <label>Last Name</label>
+          <input type="text" id="ln" placeholder="Your last name">
+        </div>
+        <div class="fg">
+          <label>Email</label>
+          <input type="email" id="em" placeholder="your@email.com">
+        </div>
+        <div class="fg">
+          <label>Phone (optional)</label>
+          <input type="tel" id="ph" placeholder="(555) 000-0000">
+        </div>
+        <div class="fg full">
+          <label>Event Type</label>
+          <select id="et">
+            <option value="">Select an event type…</option>
+            <option>Graduation Party</option>
+            <option>Banquet / Gala</option>
+            <option>Baby Shower</option>
+            <option>Birthday Celebration</option>
+            <option>Spirit / Game Day Event</option>
+            <option>Wedding Reception</option>
+            <option>Corporate Event</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg full">
+          <label>Your Message or Feedback</label>
+          <textarea id="msg" placeholder="Describe your vision, event date, guest count, or share your experience…"></textarea>
+        </div>
+      </div>
+      <button class="fsub-btn" onclick="sendForm()">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="fbrand">
+      <img src="events-by-dana-logo.png" alt="Event Designs By Dana logo" class="brand-mark">
+      <span class="brand-text">
+        <span class="brand-line">Event Designs <span>By Dana</span></span>
+        <span class="brand-subline">Floral &amp; Event Design</span>
+      </span>
+    </div>
+    <p class="ftag">Crafting extraordinary experiences through florals, décor, and personalized design. Every event tells a story — let's make yours unforgettable.</p>
+    <div class="fsocial">
+      <a href="https://www.instagram.com/event_designs_by_dana/" target="_blank" title="Instagram">📸</a>
+      <a href="#contact" title="Contact">✉️</a>
+    </div>
+  </div>
+  <div class="fcol">
+    <h4>Services</h4>
+    <ul>
+      <li><a href="#services">Floral Arrangements</a></li>
+      <li><a href="#services">Spirit-Themed Décor</a></li>
+      <li><a href="#services">Balloon Garlands</a></li>
+      <li><a href="#services">Graduation Packages</a></li>
+      <li><a href="#services">Personalized Gifts</a></li>
+    </ul>
+  </div>
+  <div class="fcol">
+    <h4>Navigate</h4>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Dana</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Book Now</a></li>
+    </ul>
+  </div>
+  <div class="fbot">
+    <span>© 2026 Events by Dana · Dana Iman · All rights reserved</span>
+    <span>Designed with ❤️ for every celebration</span>
+  </div>
+</footer>
+
+<script>
+// Chip selector
+document.querySelectorAll('.chip').forEach(c=>{
+  c.addEventListener('click',function(){
+    document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Scroll fade-in
+const io=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting) setTimeout(()=>e.target.classList.add('in'), i*90);
+  });
+},{threshold:0.08});
+document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
+
+// Service cards stagger
+const sc=document.querySelectorAll('.svc-card');
+sc.forEach(c=>c.classList.add('fade-up'));
+const scio=new IntersectionObserver(entries=>{
+  if(entries.some(e=>e.isIntersecting)) sc.forEach((c,i)=>setTimeout(()=>c.classList.add('in'),i*110));
+},{threshold:0.05});
+if(sc.length) scio.observe(sc[0]);
+
+// Nav shadow on scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').style.boxShadow=window.scrollY>40?'0 4px 30px rgba(58,38,36,.09)':'none';
+});
+
+// Form submit
+function sendForm(){
+  const fn=document.getElementById('fn').value.trim();
+  const ln=document.getElementById('ln').value.trim();
+  const em=document.getElementById('em').value.trim();
+  const ph=document.getElementById('ph').value.trim();
+  const et=document.getElementById('et').value;
+  const msg=document.getElementById('msg').value.trim();
+  const chip=document.querySelector('.chip.active');
+  const reason=chip?chip.textContent.trim():'';
+  let pass=true;
+  [{id:'fn',v:fn},{id:'em',v:em},{id:'msg',v:msg}].forEach(({id,v})=>{
+    const el=document.getElementById(id);
+    if(!v){el.style.borderColor='#c0605a';pass=false;}
+  });
+  if(!pass) return;
+  const subject=encodeURIComponent('New Inquiry from '+fn+(ln?' '+ln:'')+' — '+reason);
+  const body=encodeURIComponent(
+    'Name: '+fn+(ln?' '+ln:'')+'\n'+
+    'Email: '+em+'\n'+
+    (ph?'Phone: '+ph+'\n':'')+
+    'Reaching out about: '+reason+'\n'+
+    (et?'Event Type: '+et+'\n':'')+
+    '\nMessage:\n'+msg
+  );
+  window.location.href='mailto:eventdesignsbydana@yahoo.com?subject='+subject+'&body='+body;
+  document.getElementById('formBody').style.display='none';
+  document.getElementById('formOk').style.display='block';
+}
+document.querySelectorAll('input,textarea,select').forEach(el=>{
+  el.addEventListener('input',function(){this.style.borderColor='';});
+});
+
+// Mobile menu toggle
+function toggleMenu(){
+  const btn=document.querySelector('.hamburger');
+  const menu=document.getElementById('mobileMenu');
+  btn.classList.toggle('active');
+  if(menu.style.display==='flex'){
+    menu.classList.remove('open');
+    setTimeout(()=>{menu.style.display='none';document.body.style.overflow='';},300);
+  }else{
+    menu.style.display='flex';
+    requestAnimationFrame(()=>menu.classList.add('open'));
+    document.body.style.overflow='hidden';
+  }
+}
+</script>
+</body>
+</html>
+
