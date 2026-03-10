@@ -86,7 +86,7 @@ blockquote.pull{font-family:'Cormorant Garamond',serif;font-style:italic;font-si
 .services{background:var(--cream);text-align:center}
 .services-header{max-width:600px;margin:0 auto 5rem}
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.svc-card{background:white;padding:3rem 2rem;position:relative;overflow:hidden;transition:all .4s;border-bottom:3px solid transparent}
+.svc-card{background:white;padding:3rem 2rem;position:relative;overflow:hidden;transition:all .4s;border-bottom:3px solid transparent;display:flex;flex-direction:column}
 .svc-card:hover{transform:translateY(-8px);border-bottom-color:var(--rose);box-shadow:0 20px 60px rgba(58,38,36,.1)}
 .svc-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,rgba(232,196,184,.2),transparent 60%);opacity:0;transition:opacity .4s}
 .svc-card:hover::before{opacity:1}
@@ -98,6 +98,15 @@ blockquote.pull{font-family:'Cormorant Garamond',serif;font-style:italic;font-si
 .svc-cta-card .sub{font-size:.82rem;color:rgba(255,255,255,.85);margin-bottom:1.8rem;font-weight:300;line-height:1.8}
 .btn-white{background:white;color:var(--rose);padding:.9rem 2rem;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:all .3s}
 .btn-white:hover{background:var(--deep);color:white}
+.svc-card:has(.svc-img){padding:1.5rem 2rem 0}
+.svc-card:has(.svc-img) .svc-icon{margin-bottom:.8rem}
+.svc-card:has(.svc-img) .svc-name{margin-bottom:.8rem}
+.svc-img{width:calc(100% + 4rem);margin:0 -2rem;overflow:hidden;flex:1;min-height:200px}
+.svc-img img{width:100%;height:100%;object-fit:cover;display:block}
+.svc-wreath{position:relative;padding-bottom:1rem}
+.wreath-slideshow{position:relative;width:100%;height:260px;margin-top:1rem;overflow:hidden;border-radius:4px}
+.wreath-slideshow img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
+.wreath-slideshow img.active{opacity:1}
 /* BALLOON MENU */
 .balloon-menu{background:white;text-align:center}
 .balloon-menu-header{max-width:600px;margin:0 auto 3rem}
@@ -263,7 +272,7 @@ footer{background:var(--deep);color:rgba(255,255,255,.5);padding:4rem 6rem;displ
           <li><span class="check-dot">✓</span> Spirit-Themed Décor</li>
           <li><span class="check-dot">✓</span> Balloon Garlands &amp; Arches</li>
           <li><span class="check-dot">✓</span> Graduation &amp; Banquet Packages</li>
-          <li><span class="check-dot">✓</span> Personalized Gifts &amp; Treats</li>
+          <li><span class="check-dot">✓</span> Custom Seasonal &amp; Holiday Wreaths</li>
         </ul>
       </div>
       <div class="big-floral">✿</div>
@@ -307,27 +316,33 @@ footer{background:var(--deep);color:rgba(255,255,255,.5);padding:4rem 6rem;displ
     <div class="svc-card fade-up">
       <span class="svc-icon">🌺</span>
       <div class="svc-name">Custom Floral Arrangements</div>
-      <p class="svc-desc">Hand-crafted bouquets, table centerpieces, and floral installations tailored to your palette and theme. Every bloom chosen with care.</p>
+      <div class="svc-img"><img src="Custom_Floral_Arrangement.jpeg" alt="Custom floral arrangement"></div>
     </div>
     <div class="svc-card fade-up">
       <span class="svc-icon">🏆</span>
       <div class="svc-name">Spirit-Themed Décor</div>
-      <p class="svc-desc">Show your team pride with custom décor for game days, pep rallies, and performances — vibrant, energetic, and unforgettable.</p>
+      <div class="svc-img"><img src="Spirit_Themed_Decor.jpeg" alt="Spirit themed decor"></div>
     </div>
     <div class="svc-card fade-up">
       <span class="svc-icon">🎈</span>
       <div class="svc-name">Balloon Garlands &amp; Arches</div>
-      <p class="svc-desc">From dreamy pastel clouds to bold statement pieces — balloon garlands, arches, and centerpieces that transform any room.</p>
+      <div class="svc-img"><img src="Ballon_Garland_Arches.jpeg" alt="Balloon garlands and arches"></div>
     </div>
     <div class="svc-card fade-up">
       <span class="svc-icon">🎓</span>
       <div class="svc-name">Graduation &amp; Banquet Packages</div>
       <p class="svc-desc">Complete décor packages for milestone moments — graduation parties, award banquets, and recognition events done beautifully.</p>
     </div>
-    <div class="svc-card fade-up">
-      <span class="svc-icon">🎁</span>
-      <div class="svc-name">Personalized Gifts &amp; Treats</div>
-      <p class="svc-desc">Custom gift arrangements, treat displays, and seasonal designs that add the perfect finishing touch to any occasion.</p>
+    <div class="svc-card svc-wreath fade-up">
+      <span class="svc-icon">🌿</span>
+      <div class="svc-name">Custom Seasonal &amp; Holiday Wreaths</div>
+      <div class="wreath-slideshow" id="wreathSlideshow">
+        <img src="door-wreath-1.jpeg" alt="Door wreath design 1" class="active">
+        <img src="door-wreath-2.jpeg" alt="Door wreath design 2">
+        <img src="door-wreath-3.jpeg" alt="Door wreath design 3">
+        <img src="door-wreath-4.jpeg" alt="Door wreath design 4">
+        <img src="door-wreath-5.jpeg" alt="Door wreath design 5">
+      </div>
     </div>
     <div class="svc-card svc-cta-card fade-up">
       <div class="heading">Have a custom vision in mind?</div>
@@ -500,7 +515,7 @@ footer{background:var(--deep);color:rgba(255,255,255,.5);padding:4rem 6rem;displ
       <li><a href="#services">Spirit-Themed Décor</a></li>
       <li><a href="#services">Balloon Garlands</a></li>
       <li><a href="#services">Graduation Packages</a></li>
-      <li><a href="#services">Personalized Gifts</a></li>
+      <li><a href="#services">Seasonal Wreaths</a></li>
     </ul>
   </div>
   <div class="fcol">
@@ -601,6 +616,17 @@ function sendForm(){
 document.querySelectorAll('input,textarea,select').forEach(el=>{
   el.addEventListener('input',function(){this.style.borderColor='';});
 });
+
+// Wreath slideshow
+(function(){
+  const imgs=document.querySelectorAll('#wreathSlideshow img');
+  let cur=0;
+  setInterval(()=>{
+    imgs[cur].classList.remove('active');
+    cur=(cur+1)%imgs.length;
+    imgs[cur].classList.add('active');
+  },2500);
+})();
 
 // Mobile menu toggle
 function toggleMenu(){
