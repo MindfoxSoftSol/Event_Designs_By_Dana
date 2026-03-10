@@ -98,6 +98,11 @@ blockquote.pull{font-family:'Cormorant Garamond',serif;font-style:italic;font-si
 .svc-cta-card .sub{font-size:.82rem;color:rgba(255,255,255,.85);margin-bottom:1.8rem;font-weight:300;line-height:1.8}
 .btn-white{background:white;color:var(--rose);padding:.9rem 2rem;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:all .3s}
 .btn-white:hover{background:var(--deep);color:white}
+/* BALLOON MENU */
+.balloon-menu{background:white;text-align:center}
+.balloon-menu-header{max-width:600px;margin:0 auto 3rem}
+.balloon-menu-img{max-width:900px;margin:0 auto}
+.balloon-menu-img img{width:100%;height:auto;border-radius:4px;box-shadow:0 10px 40px rgba(58,38,36,.1)}
 /* GALLERY */
 .gallery-section{background:var(--cream);text-align:center}
 .gallery-header{max-width:600px;margin:0 auto 4rem}
@@ -216,6 +221,7 @@ footer{background:var(--deep);color:rgba(255,255,255,.5);padding:4rem 6rem;displ
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
+    <li><a href="#balloon-menu">Balloons</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#testimonials">Reviews</a></li>
     <li><a href="#contact" class="nav-cta">Book Now</a></li>
@@ -229,6 +235,7 @@ footer{background:var(--deep);color:rgba(255,255,255,.5);padding:4rem 6rem;displ
 <div class="mobile-overlay" id="mobileMenu">
   <a href="#about" onclick="toggleMenu()">About</a>
   <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#balloon-menu" onclick="toggleMenu()">Balloons</a>
   <a href="#gallery" onclick="toggleMenu()">Gallery</a>
   <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
   <a href="#contact" class="nav-cta" onclick="toggleMenu()">Book Now</a>
@@ -327,6 +334,21 @@ footer{background:var(--deep);color:rgba(255,255,255,.5);padding:4rem 6rem;displ
       <p class="sub">Every dream event starts with a conversation. Let's bring your ideas to life.</p>
       <a href="#contact" class="btn-white">Let's Talk</a>
     </div>
+  </div>
+</section>
+
+<!-- BALLOON MENU -->
+<section class="balloon-menu" id="balloon-menu">
+  <div class="balloon-menu-header fade-up">
+    <div class="section-label" style="justify-content:center">Our Balloon Collection</div>
+    <h2 class="section-title">Custom Designed <em>Balloon Decor</em></h2>
+    <p style="font-size:.9rem;font-weight:300;line-height:1.8;color:var(--muted);max-width:550px;margin:1rem auto 0">Delivery, set-up and pick-up available. Browse our offerings and let us bring the perfect balloon design to your event.</p>
+  </div>
+  <div class="balloon-menu-img fade-up">
+    <img src="balloon-menu.jpeg" alt="Balloon decor menu — Grab and Go Garland, Organic Garland, Balloon Wall, Ring Organic Garland, Organic Arch Garland, Balloon Columns, Boxwood Wall, Chiara Arch Wall, Easel Party Signage">
+  </div>
+  <div style="text-align:center;margin-top:3rem" class="fade-up">
+    <a href="#contact" class="btn-primary">Request a Quote</a>
   </div>
 </section>
 
