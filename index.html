@@ -103,8 +103,10 @@ blockquote.pull{font-family:'Cormorant Garamond',serif;font-style:italic;font-si
 .svc-card:has(.svc-img) .svc-name{margin-bottom:.8rem}
 .svc-img{width:calc(100% + 4rem);margin:0 -2rem;overflow:hidden;flex:1;min-height:200px}
 .svc-img img{width:100%;height:100%;object-fit:cover;display:block}
-.svc-wreath{position:relative;padding-bottom:1rem}
-.wreath-slideshow{position:relative;width:100%;height:260px;margin-top:1rem;overflow:hidden;border-radius:4px}
+.svc-wreath{position:relative;padding:1.5rem 2rem 0}
+.svc-wreath .svc-icon{margin-bottom:.8rem}
+.svc-wreath .svc-name{margin-bottom:.8rem}
+.wreath-slideshow{position:relative;width:calc(100% + 4rem);margin:0 -2rem;flex:1;min-height:420px;overflow:hidden}
 .wreath-slideshow img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
 .wreath-slideshow img.active{opacity:1}
 /* BALLOON MENU */
@@ -119,6 +121,7 @@ blockquote.pull{font-family:'Cormorant Garamond',serif;font-style:italic;font-si
 .ig-embed{position:relative;width:100%;padding-bottom:125%;overflow:hidden;background:white;border-bottom:3px solid transparent;transition:all .4s}
 .ig-embed:hover{transform:translateY(-6px);border-bottom-color:var(--rose);box-shadow:0 20px 60px rgba(58,38,36,.1)}
 .ig-embed iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.ig-embed img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block}
 .gallery-cta{padding:4rem 6rem;text-align:center;background:var(--cream)}
 .gallery-cta p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:var(--muted);margin-bottom:1.5rem}
 /* TESTIMONIALS */
@@ -328,10 +331,15 @@ footer{background:var(--deep);color:rgba(255,255,255,.5);padding:4rem 6rem;displ
       <div class="svc-name">Balloon Garlands &amp; Arches</div>
       <div class="svc-img"><img src="Ballon_Garland_Arches.jpeg" alt="Balloon garlands and arches"></div>
     </div>
-    <div class="svc-card fade-up">
+    <div class="svc-card svc-wreath fade-up">
       <span class="svc-icon">🎓</span>
       <div class="svc-name">Graduation &amp; Banquet Packages</div>
-      <p class="svc-desc">Complete décor packages for milestone moments — graduation parties, award banquets, and recognition events done beautifully.</p>
+      <div class="wreath-slideshow" id="gradSlideshow">
+        <img src="grad-1.jpeg" alt="Graduation décor design 1" class="active">
+        <img src="grad-2.jpeg" alt="Graduation décor design 2">
+        <img src="grad-3.jpeg" alt="Graduation décor design 3">
+        <img src="grad-4.jpeg" alt="Graduation décor design 4">
+      </div>
     </div>
     <div class="svc-card svc-wreath fade-up">
       <span class="svc-icon">🌿</span>
@@ -389,6 +397,15 @@ footer{background:var(--deep);color:rgba(255,255,255,.5);padding:4rem 6rem;displ
     <div class="ig-embed fade-up">
       <iframe src="https://www.instagram.com/p/DVAbTcADNuV/embed/" loading="lazy" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe>
     </div>
+    <div class="ig-embed fade-up"><img src="gallery-1.jpeg" loading="lazy" alt="Event decor by Dana"></div>
+    <div class="ig-embed fade-up"><img src="gallery-2.jpeg" loading="lazy" alt="Event decor by Dana"></div>
+    <div class="ig-embed fade-up"><img src="gallery-3.jpeg" loading="lazy" alt="Event decor by Dana"></div>
+    <div class="ig-embed fade-up"><img src="gallery-4.jpeg" loading="lazy" alt="Event decor by Dana"></div>
+    <div class="ig-embed fade-up"><img src="gallery-5.jpeg" loading="lazy" alt="Event decor by Dana"></div>
+    <div class="ig-embed fade-up"><img src="gallery-6.jpeg" loading="lazy" alt="Event decor by Dana"></div>
+    <div class="ig-embed fade-up"><img src="gallery-7.jpeg" loading="lazy" alt="Event decor by Dana"></div>
+    <div class="ig-embed fade-up"><img src="gallery-8.jpeg" loading="lazy" alt="Event decor by Dana"></div>
+    <div class="ig-embed fade-up"><img src="gallery-9.jpeg" loading="lazy" alt="Event decor by Dana"></div>
   </div>
   <div class="gallery-cta">
     <p>See more of Dana's work on Instagram</p>
@@ -415,6 +432,21 @@ footer{background:var(--deep);color:rgba(255,255,255,.5);padding:4rem 6rem;displ
       <div class="tstars">★★★★★</div>
       <p class="ttext">"Dana did a wonderful job for our son's first birthday party! It was fish-themed, and she used the perfect color combinations! Highly recommend her for any party or event!"</p>
       <div class="tauthor">— Kimberly Meza</div>
+    </div>
+    <div class="tcard fade-up">
+      <div class="tstars">★★★★★</div>
+      <p class="ttext">"Dana did an amazing job with the balloon arch she provided for our graduation party. She is a true artist with a designer's eye. Her communication was wonderful and she set up the arch in an efficient, timely manner. Dana is great to work with! I would highly recommend and we will definitely use her again."</p>
+      <div class="tauthor">— Anna Hubbard</div>
+    </div>
+    <div class="tcard fade-up">
+      <div class="tstars">★★★★★</div>
+      <p class="ttext">"I cannot thank Dana enough for exceeding my vision for a tropical 70th birthday for my husband! The stunning tropical flower arrangements were spectacular and they certainly did not go unnoticed by the guests — everyone was in awe! She also did a wonderful job with the balloon arrangement that welcomed all my guests through the door of the party. Dana delivered and set up, giving me a stress-free event. Thank you Dana!"</p>
+      <div class="tauthor">— Wendy Dill</div>
+    </div>
+    <div class="tcard fade-up">
+      <div class="tstars">★★★★★</div>
+      <p class="ttext">"Dana was absolutely exceptional to work with for our client's Anniversary Celebration! Her attention to customer service, responsiveness and professionalism are second-to-none. She did a beautiful job with decor and floral and we cannot thank her enough for bringing our vision to life and more!"</p>
+      <div class="tauthor">— Rachel Feldt</div>
     </div>
   </div>
 </section>
@@ -617,16 +649,19 @@ document.querySelectorAll('input,textarea,select').forEach(el=>{
   el.addEventListener('input',function(){this.style.borderColor='';});
 });
 
-// Wreath slideshow
-(function(){
-  const imgs=document.querySelectorAll('#wreathSlideshow img');
+// Card slideshows (wreath + graduation)
+function startSlideshow(id){
+  const imgs=document.querySelectorAll('#'+id+' img');
+  if(!imgs.length)return;
   let cur=0;
   setInterval(()=>{
     imgs[cur].classList.remove('active');
     cur=(cur+1)%imgs.length;
     imgs[cur].classList.add('active');
   },2500);
-})();
+}
+startSlideshow('wreathSlideshow');
+startSlideshow('gradSlideshow');
 
 // Mobile menu toggle
 function toggleMenu(){
